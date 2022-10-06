@@ -20,6 +20,7 @@ interface MyAPI {
 
     fun uploadImage(
         @Part image: MultipartBody.Part,
+        @Part("test") test: RequestBody,
         @Part("desc") desc: RequestBody
     ): Call<UploadResponse>
 
@@ -31,7 +32,7 @@ interface MyAPI {
 
             return Retrofit.Builder()
 //                .baseUrl("http://10.71.104.125/ImageUploader/")
-                .baseUrl("http://10.0.2.2:3000/")
+                .baseUrl("http://10.71.104.171:3000/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(MyAPI::class.java)

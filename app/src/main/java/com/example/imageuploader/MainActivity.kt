@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.imageuploader.databinding.ActivityMainBinding
 import com.example.testuploadimg.MyAPI
+import okhttp3.MediaType.Companion.parse
 //import com.example.testuploadimg.databinding.ActivityMainBinding
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun uploadImage() {
+        val test = "test"
         if (selectedImageUri == null) {
             binding.root.snackbar("Select an Image First")
             return
@@ -84,6 +86,7 @@ class MainActivity : AppCompatActivity() {
                 file.name,
                 body
             ),
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), test),
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json")
         ).enqueue(object : Callback<UploadResponse> {
             override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
