@@ -8,10 +8,10 @@ import okio.BufferedSink
 import java.io.File
 import java.io.FileInputStream
 
-class UploadRequestBody(
+class UoloadRequestBodyEdit(
     private val file: File,
     private val contentType: String,
-    private val callback: MainActivity.Companion
+    private val callback: manage_bank
 ) : RequestBody() {
 
     override fun contentType() = "$contentType/*".toMediaTypeOrNull()
@@ -49,4 +49,3 @@ class UploadRequestBody(
         private const val DEFAULT_BUFFER_SIZE = 2048
     }
 }
-

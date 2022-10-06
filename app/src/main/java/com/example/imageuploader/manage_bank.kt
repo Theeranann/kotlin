@@ -5,11 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
-import com.example.imageuploader.databinding.ActivityMainBinding
+import com.example.imageuploader.databinding.ActivityManageBankBinding
 import com.example.testuploadimg.MyAPI
-//import com.example.testuploadimg.databinding.ActivityMainBinding
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -20,32 +18,21 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+class manage_bank : AppCompatActivity() {
+    lateinit var binding: ActivityManageBankBinding
     private var selectedImageUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityManageBankBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-        binding.imageView.setOnClickListener(View.OnClickListener {
+        binding.qrCode.setOnClickListener {
             openImageChooser()
-        })
-        binding.buttonUpload.setOnClickListener{
+        }
+        binding.btnAddBank.setOnClickListener {
             uploadImage()
         }
-        binding.updatepage.setOnClickListener {
-            openUpdatePage()
-        }
     }
-
-    private fun openUpdatePage() {
-        val intent = Intent(this,manage_bank::class.java)
-        startActivity(intent)
-    }
-
     companion object {
         const val REQUEST_CODE_PICK_IMAGE = 101
     }
@@ -64,14 +51,17 @@ class MainActivity : AppCompatActivity() {
             when (requestCode) {
                 REQUEST_CODE_PICK_IMAGE -> {
                     selectedImageUri = data?.data
-                    binding.imageView.setImageURI(selectedImageUri)
+                    binding.qrCode.setImageURI(selectedImageUri)
                 }
             }
         }
     }
     private fun uploadImage() {
-
-        val test = "test"
+        val bank_admin_id = "1"
+        val bank_name = binding.editBankName.text.toString()
+        val account_number = binding.editBankNumber.text.toString()
+        val first_name= binding.editBankAccountFirstName.text.toString()
+        val last_name= binding.editBankAccountLastName.text.toString()
 
         if (selectedImageUri == null) {
             binding.root.snackbar("Select an Image First")
@@ -87,15 +77,19 @@ class MainActivity : AppCompatActivity() {
         inputStream.copyTo(outputStream)
 
 //        progress_bar.progress = 0
-        val body = UploadRequestBody(file, "image", MainActivity)
-        MyAPI().uploadImage(
+        val body = UoloadRequestBodyEdit(file, "image", this)
+        MyAPI().edit(
             MultipartBody.Part.createFormData(
                 "image",
                 file.name,
                 body
             ),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), test),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json")
+            bank_admin_id,
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), bank_name),
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), account_number),
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), first_name),
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), last_name)
+
         ).enqueue(object : Callback<UploadResponse> {
             override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
 //                binding.root.snackbar(t.message!!)
@@ -115,4 +109,3 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
-

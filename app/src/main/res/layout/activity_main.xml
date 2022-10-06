@@ -25,42 +25,6 @@
             android:gravity="center_horizontal"
             tools:ignore="MissingConstraints">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp">
-
-                <TextView
-                    android:id="@+id/Text_soccer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="40dp"
-                    android:gravity="center"
-                    android:text="Soccer Cube"
-                    android:textColor="#fff"
-                    android:textSize="30sp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/ddd"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-
-                android:padding="20dp"
-                android:scaleType="centerCrop">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="Soccer cube สนาม 1 (In door) \n 10/10/2020 \n 17.00 - 19.00"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:layout_alignParentBottom="true"
-                    />
-            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/Payment"
@@ -71,16 +35,6 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:text="เลขบัญชี 463 736 8376 \n ธนาคาร ไทยพาณิช \n นาย นาม สมมุติ"
-                    android:textColor="#4F4F4F"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -149,6 +103,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/updatepage"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
@@ -158,7 +113,7 @@
                 android:backgroundTint="#161D6F"
                 android:letterSpacing="0"
                 android:layout_marginHorizontal="10dp"
-                android:text="ชำระเงิน"
+                android:text="update Page"
                 android:textAllCaps="false"
                 android:textStyle="bold"
                 android:textSize="20sp"
